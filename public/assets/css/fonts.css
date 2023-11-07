@@ -1,0 +1,33 @@
+@font-face {
+    font-family: Josefin Sans;
+    src: url("/assets/fonts/JosefinSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: Josefin Sans;
+    src: url("/assets/fonts/JosefinSans-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Josefin Sans;
+    src: url("/assets/fonts/JosefinSans-Italic.ttf");
+    font-style: italic;
+} 
+
+@font-face {
+    font-family: Georama;
+    src: url("/assets/fonts/Georama-Regular.ttf");
+}
+
+@font-face {
+    font-family: Georama;
+    src: url("/assets/fonts/Georama-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Georama;
+    src: url("/assets/fonts/Georama-Italic.ttf");
+    font-style: italic;
+} 
