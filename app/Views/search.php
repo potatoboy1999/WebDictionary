@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url("assets/css/fonts.css")?>">
     <link rel="stylesheet" type="text/css" href="<?=base_url("assets/css/style.css")?>">
     <link rel="stylesheet" href="<?=base_url("assets/boostrap/css/bootstrap.min.css")?>">
+    <script src="<?=base_url("assets/jquery/jquery-3.7.1.min.js")?>"></script>
     <script src="<?=base_url("assets/boostrap/js/bootstrap.min.js")?>"></script>
 </head>
 <body id="main">
@@ -26,70 +27,73 @@
                     </div>
                 </div>
                 <div id="res">
-                    <div id="word-cont">
-                        <h2 id="word">Dog</h2>
-                        <div id="phonetics">
-                            <div class="phonetic">/dɑɡ/</div>
-                            <div class="phonetic pointer">/dɒɡ/</div>
-                            <div class="phonetic pointer">/dɔɡ/</div>
+                    <div id="meanings">
+                        <div class="word-cont" block="0">
+                            <h2 class="word">Dog</h2>
+                            <div class="phonetics">
+                                <div class="phonetic">/dɑɡ/</div>
+                                <div class="phonetic pointer">/dɒɡ/</div>
+                                <div class="phonetic pointer">/dɔɡ/</div>
+                            </div>
+                        </div>
+                        <div class="def-cont" block="0">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p class="def-type">Noun</p>
+                                            <ul>
+                                                <li>
+                                                    <p>A mammal, Canis familiaris or Canis lupus familiaris, that has been domesticated for thousands of years, of highly variable appearance due to human breeding.</p>
+                                                    <p class="def-example">“The dog barked all night long.”</p>
+                                                </li>
+                                                <li>
+                                                    <p>Any member of the Family Canidae, including domestic dogs, wolves, coyotes, jackals, foxes, and their relatives (extant and extinct); canid.</p>
+                                                </li>
+                                                <li>
+                                                    <p>A male dog, wolf or fox, as opposed to a bitch or vixen.</p>
+                                                </li>
+                                                <li>
+                                                    <p>A dull, unattractive girl or woman.</p>
+                                                    <p class="def-example">“She’s a real dog.”</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mb-3 sidecard card">
+                                        <div class="card-body">
+                                            <p class="def-type">Synonym</p>
+                                            <ul>
+                                                <li>Canis canis</li>
+                                                <li>Canis domesticus</li>
+                                                <li>Canis familiaris</li>
+                                                <li>Canine</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 sidecard card">
+                                        <div class="card-body">
+                                            <p class="def-type">Antonyms</p>
+                                            <ul>
+                                                <li>...</li>
+                                                <li>...</li>
+                                                <li>...</li>
+                                                <li>...</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-4 w-100 line-bottom-dark"></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p class="def-type">Noun</p>
-                                    <ul>
-                                        <li>
-                                            <p>A mammal, Canis familiaris or Canis lupus familiaris, that has been domesticated for thousands of years, of highly variable appearance due to human breeding.</p>
-                                            <p class="def-example">“The dog barked all night long.”</p>
-                                        </li>
-                                        <li>
-                                            <p>Any member of the Family Canidae, including domestic dogs, wolves, coyotes, jackals, foxes, and their relatives (extant and extinct); canid.</p>
-                                        </li>
-                                        <li>
-                                            <p>A male dog, wolf or fox, as opposed to a bitch or vixen.</p>
-                                        </li>
-                                        <li>
-                                            <p>A dull, unattractive girl or woman.</p>
-                                            <p class="def-example">“She’s a real dog.”</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="sidecard card">
-                                <div class="card-body">
-                                    <p class="def-type">Synonym</p>
-                                    <ul>
-                                        <li>Canis canis</li>
-                                        <li>Canis domesticus</li>
-                                        <li>Canis familiaris</li>
-                                        <li>Canine</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="mt-3 sidecard card">
-                                <div class="card-body">
-                                    <p class="def-type">Antonyms</p>
-                                    <ul>
-                                        <li>...</li>
-                                        <li>...</li>
-                                        <li>...</li>
-                                        <li>...</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="my-4 w-100 line-bottom-dark"></div>
                 </div>
             </div>
         </div>
-        
     </div>
 
-    
+    <script src="<?=base_url("assets/js/scripts.js")?>"></script>
 </body>
 </html>
