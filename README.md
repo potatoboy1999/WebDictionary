@@ -6,6 +6,7 @@
 - PHP extensions: 
     - [intl](http://php.net/manual/en/intl.requirements.php)
     - [mbstring](http://php.net/manual/en/mbstring.installation.php)
+    - zip
 - [Composer](https://getcomposer.org/download/)
 
 Some extensions might be already downloaded with your PHP version. Make sure they are not commented on the `php.ini` file (located on your PHP installation root folder).
@@ -21,7 +22,7 @@ On your command line, redirect to the project root and run
 
 ## Setup
 
-Copy `env` to `.env` and set the following settings:
+On the project, rename `env` to `.env` and uncomment or set the following settings:
 - `CI_ENVIRONMENT = production`
 - `app.baseURL = 'http://localhost:8080/'` (or whichever Port the local server will run in)
 
