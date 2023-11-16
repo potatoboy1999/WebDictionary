@@ -9,6 +9,8 @@
     - json (enabled by default - don't turn it off)
 - [Composer](https://getcomposer.org/download/)
 
+Make sure both `php` and `composer` commands can be run from the command line.
+
 ## Installation
 
 On your command line, redirect to the project root and run
