@@ -1,10 +1,28 @@
+var curr_block = 0;
 $(document).ready(function(){
-    console.log("ready!");
 
     $("#searchword").on("change", function(ev){
         var word = $(this).val();
-        console.log("search word...",word);
-        searchWord(word);
+        if(word.trim() != ""){
+            searchWord(word);
+        }else{
+            switchContent("no-res-cont");
+            $("#blank").hide();
+            $("#error").show();
+            $("#error_msg").html("Please enter a valid word!");
+        }
+    });
+
+    $("#search-form").on("submit", function(ev){
+        ev.preventDefault();
+    });
+
+    $(document).on("click",".phonetic", function(ev){
+        var audiosrc = $(this).attr("src");
+        if(audiosrc != ""){
+            $("#phonetic-audio").attr("src", audiosrc);
+            document.getElementById("phonetic-audio").play();
+        }
     });
 });
 var test = null
@@ -13,7 +31,11 @@ function searchWord(word){
     $.ajax({
         url: endpoint,
         method: 'GET',
-        beforeSend: function(){},
+        beforeSend: function(){
+            //show loading
+            switchContent("loading");
+            curr_block = 0;
+        },
         success:function(res){
             test = res;
             jsonRes = res;
@@ -23,23 +45,40 @@ function searchWord(word){
                 console.log("no results");
             }else{
                 var blocks = "";
+                var header = false;
                 for (let y = 0; y < jsonRes.length; y++) {
                     const definitionBlock = jsonRes[y];
-                    console.log(definitionBlock);
                     var block = "";
                     var phonetics = "";
+                    var phonetics_list = [];
                     if(definitionBlock.phonetics.length > 0){
                         for (let i = 0; i < definitionBlock.phonetics.length; i++) {
                             const phonetic = definitionBlock.phonetics[i];
-                            phonetics += "<div class='phonetic "+(phonetic.audio != ""?"pointer":"")+"'>"+phonetic.text+"</div>";
+                            if(phonetic.text !== undefined && 
+                                phonetics_list.find(text => text == phonetic.text) === undefined
+                            ){
+                                phonetics_list.push(phonetic.text);
+                                phonetics += "<div class='phonetic "+(phonetic.audio != ""?"pointer":"")+"' src='"+phonetic.audio+"'>"+
+                                    phonetic.text+
+                                    (phonetic.audio != ""?` <i class="fa-solid fa-volume-high"></i>`:"")+
+                                "</div>";
+                            }
                         }
                     }
+                    // avoid multiple headers
+                    if(!header){
+                        block += 
+                        "<div class='word-cont' block='"+y+"'>"+
+                            "<h2 class='word'>"+capitalizeFirstLetter(word)+"</h2>"+
+                            "<div class='phonetics'>"+phonetics+"</div>"+
+                        "</div>";
+                        header = true;
+                    }
+                    if(y>0){
+                        block += "<div class='my-4 w-100 line-bottom-dark sep-block-"+y+"'></div>";
+                    }
                     block += 
-                    "<div class='word-cont' block='"+y+"'>"+
-                        "<h2 class='word'>"+capitalizeFirstLetter(word)+"</h2>"+
-                        "<div class='phonetics'>"+phonetics+"</div>"+
-                    "</div>"+
-                    "<div class='def-cont' block='"+y+"'>";
+                    "<div class='def-cont' block='"+y+"' style='"+(y>0?"display:none;":"")+"'>";
 
                     var meanings = "";
                     for (let i = 0; i < definitionBlock.meanings.length; i++) {
@@ -63,47 +102,47 @@ function searchWord(word){
                                 "<p>"+def.definition+"</p>";
                             if(def.example !== undefined &&
                                 def.example != ""){
-                                definition_list += "<p class='def-example'>"+def.example+"</p>";
+                                definition_list += "<p class='def-example'>\""+def.example+"\"</p>";
                             }
                             definition_list +="</li>";
                         }
     
                         definition += 
                             "<div class='row'>"+
-                                "<div class='col-8'>"+
-                                    "<div class='card'>"+
+                                "<div class='col-lg-8'>"+
+                                    "<div class='my-3 card'>"+
                                         "<div class='card-body'>"+
-                                            "<p class='def-type'>"+type+"</p>"+
-                                            "<ul>"+definition_list+"</ul>"+
+                                            "<p class='def-type'>"+capitalizeFirstLetter(type)+"</p>"+
+                                            "<ol>"+definition_list+"</ol>"+
                                         "</div>"+
                                     "</div>"+
                                 "</div>";
                         if(synonyms.length > 0 || antonyms.length > 0){
                             definition +=
-                                "<div class='col-4'>";
+                                "<div class='col-lg-4'>";
                             if(synonyms.length > 0){
                                 var synonyms_list = "";
                                 for (let x = 0; x < synonyms.length; x++) {
-                                    synonyms_list += "<li><p>"+synonyms[x]+"</p></li>";
+                                    synonyms_list += "<li><p>"+capitalizeFirstLetter(synonyms[x])+"</p></li>";
                                 }
                                 definition +=                            
-                                    "<div class='mb-3 sidecard card'>"+
+                                    "<div class='my-3 sidecard card'>"+
                                         "<div class='card-body'>"+
                                             "<p class='def-type'>Synonyms</p>"+
-                                            "<ul>"+synonyms_list+"</ul>"+
+                                            "<ol>"+synonyms_list+"</ol>"+
                                         "</div>"+
                                     "</div>";
                             }
                             if(antonyms.length > 0){
                                 var antonyms_list = "";
                                 for (let x = 0; x < antonyms.length; x++) {
-                                    antonyms_list += "<li><p>"+antonyms[x]+"</p></li>";
+                                    antonyms_list += "<li><p>"+capitalizeFirstLetter(antonyms[x])+"</p></li>";
                                 }
                                 definition +=                            
-                                    "<div class='mb-3 sidecard card'>"+
+                                    "<div class='my-3 sidecard card'>"+
                                         "<div class='card-body'>"+
                                             "<p class='def-type'>Antonyms</p>"+
-                                            "<ul>"+antonyms_list+"</ul>"+
+                                            "<ol>"+antonyms_list+"</ol>"+
                                         "</div>"+
                                     "</div>";
                             }
@@ -118,7 +157,6 @@ function searchWord(word){
                         meanings += definition;
                         
                     }
-                    console.log("meanigs...",meanings);
                     block += meanings;
                     
                     block += 
@@ -127,13 +165,29 @@ function searchWord(word){
                     blocks += block;
                 }
                 $("#meanings").html(blocks);
-                $("#res").show();
+                switchContent("res");
             }
         },
-        error: function(err){
-            console.log("error on search");
+        error: function(errorRes, textStatus, errorThrown){
+            var jsonRes = errorRes.responseJSON;
+            var text = "Error on search...";
+            if(jsonRes !== undefined &&
+                jsonRes.title !== undefined && 
+                jsonRes.title == "No Definitions Found"){
+                text = "No Definitions Found";
+            }
+
+            switchContent("no-res-cont");
+            $("#blank").hide();
+            $("#error").show();
+            $("#error_msg").html(text);
         }
     });
+}
+
+function switchContent(content){
+    $(".dic-content").hide();
+    $(`#${content}`).show();
 }
 
 function capitalizeFirstLetter(string) {

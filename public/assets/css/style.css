@@ -18,6 +18,9 @@ h1,h2,h3,h4,h5 {
     background-color: #000;
     padding: 30px 70px;
 }
+#res{
+    width: 100%;
+}
 #res-cont{
     flex: 1 0;
     background-color: #F4F4F4;
@@ -42,14 +45,14 @@ h1,h2,h3,h4,h5 {
 .line-bottom-dark{
     border-bottom: 1px solid #C7C7C7;
 }
-#no-res-cont{
+#no-res-cont, #loading{
     display: flex;
     min-height: 100%;
     align-items: center;
     justify-content: center;
     flex: 1;
 }
-#no-res{
+.no-res{
     border:2px solid #909090;
     border-radius: 10px;
     width: 280px;
@@ -59,7 +62,7 @@ h1,h2,h3,h4,h5 {
     justify-content: center;
     align-items: center;
 }
-#no-res p{
+.no-res p{
     color: #909090;
     text-align: center;
     font-size: 24px;
@@ -85,6 +88,7 @@ h1,h2,h3,h4,h5 {
     background-color: #000;
     padding: 5px 10px;
     margin-right: 5px;
+    margin-top: 5px;
 }
 .phonetic.pointer{
     cursor: pointer;
@@ -96,18 +100,42 @@ h1,h2,h3,h4,h5 {
     margin-bottom: 2px;
 }
 .def-example{
+    background-color: #d7d7d7;
+    padding: 5px 10px;
+    border-radius: 5px;
     text-align: left;
     font-style: italic;
     margin-bottom: 10px!important;
-    /*margin-left: 15px;*/
 }
 .sidecard.card{
     background-color:#d3d3d3;
 }
-/* .def-type {
-    display: inline-block;
-    background-color: #000;
-    padding: 5px 15px;
-    color: white;
-    border-radius: 5px;
-} */
+.def-type {
+    font-weight: bold;
+}
+
+.error-res {
+    border: 2px solid #ef6767;
+}
+
+.error-res p {
+    color: #ef6767;
+}
+
+#error .error-icon {
+    font-size: 46px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 767px) {
+    #search-cont, #res-cont{
+        padding: 30px 30px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    .no-res{
+        width: 220px;
+        height: 200px;
+    }
+}
