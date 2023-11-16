@@ -6,7 +6,6 @@
 - PHP extensions: 
     - [intl](http://php.net/manual/en/intl.requirements.php)
     - [mbstring](http://php.net/manual/en/mbstring.installation.php)
-    - json (enabled by default - don't turn it off)
 - [Composer](https://getcomposer.org/download/)
 
 Some extensions might be already downloaded with your PHP version. Make sure they are not commented on the `php.ini` file (located on your PHP installation root folder).
@@ -14,6 +13,8 @@ Some extensions might be already downloaded with your PHP version. Make sure the
 Make sure both `php` and `composer` commands can be run from the command line.
 
 ## Installation
+
+Clone or download the project on your desired directory.
 
 On your command line, redirect to the project root and run
 `composer install`
