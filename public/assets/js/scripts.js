@@ -75,7 +75,7 @@ function searchWord(word){
                         header = true;
                     }
                     if(y>0){
-                        block += "<div class='my-4 w-100 line-bottom-dark sep-block-"+y+"'></div>";
+                        block += "<div class='my-4 w-100 line-bottom-dark sep-block-"+y+"' style='display:none;'></div>";
                     }
                     block += 
                     "<div class='def-cont' block='"+y+"' style='"+(y>0?"display:none;":"")+"'>";
