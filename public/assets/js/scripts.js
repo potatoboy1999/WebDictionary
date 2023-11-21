@@ -1,4 +1,5 @@
 var curr_block = 0;
+var totl_block = 0;
 $(document).ready(function(){
 
     $("#searchword").on("change", function(ev){
@@ -24,6 +25,19 @@ $(document).ready(function(){
             document.getElementById("phonetic-audio").play();
         }
     });
+
+    $(document).on("click","#more-btn", function(ev){
+        //show next block
+        curr_block++;
+        $(`.def-cont[block=${curr_block}]`).show();
+        $(`.line-bottom-dark.sep-block-${curr_block}`).show();
+        console.log(`.def-cont.sep-block-${curr_block}`);
+        //hide button
+        if(curr_block == (totl_block-1)){
+            $("#more-btn").hide();
+        }
+    });
+    
 });
 var test = null
 function searchWord(word){
@@ -35,6 +49,7 @@ function searchWord(word){
             //show loading
             switchContent("loading");
             curr_block = 0;
+            totl_block = 0;
         },
         success:function(res){
             test = res;
@@ -46,6 +61,7 @@ function searchWord(word){
             }else{
                 var blocks = "";
                 var header = false;
+                totl_block = jsonRes.length;
                 for (let y = 0; y < jsonRes.length; y++) {
                     const definitionBlock = jsonRes[y];
                     var block = "";
@@ -164,6 +180,11 @@ function searchWord(word){
 
                     blocks += block;
                 }
+                if(totl_block > 1){
+                    blocks += 
+                    `<div><a id="more-btn" class="btn btn-dark">See more <i class="fa-solid fa-angle-down"></i></a></div>`;
+                }
+
                 $("#meanings").html(blocks);
                 switchContent("res");
             }
